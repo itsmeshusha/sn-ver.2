@@ -2,6 +2,7 @@ import React from 'react'
 import s from "../Dialogs.module.css";
 
 type PropsType = {
+    id: number
     message: string
 }
 
