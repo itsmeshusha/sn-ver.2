@@ -2,9 +2,9 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {AppRootStateType} from "../../redux/store";
+import {AppRootStateType} from "../../state/store";
 import {useSelector} from "react-redux";
-import {DialogsType, MessagesType} from "../../redux/dialogsReducer";
+import {DialogsType, MessagesType} from "../../state/dialogsReducer";
 
 
 const Dialogs = () => {
