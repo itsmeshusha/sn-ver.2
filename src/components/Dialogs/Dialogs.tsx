@@ -22,16 +22,10 @@ const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-                <DialogItem id={dialogsData[2].id} name={dialogsData[3].name}/>
-                <DialogItem id={dialogsData[3].id} name={dialogsData[4].name}/>
+                {dialogsData.map(el => <DialogItem id={el.id} name={el.name}/>)}
             </div>
             <div className={s.messages}>
-                <Message id={messagesData[0].id} message={messagesData[0].message}/>
-                <Message id={messagesData[1].id} message={messagesData[1].message}/>
-                <Message id={messagesData[2].id} message={messagesData[2].message}/>
-
+                {messagesData.map(el => <Message id={el.id} message={el.message}/>)}
             </div>
         </div>
     )
