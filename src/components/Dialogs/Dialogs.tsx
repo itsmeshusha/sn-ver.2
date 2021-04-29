@@ -2,22 +2,16 @@ import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {AppRootStateType} from "../../redux/store";
+import {useSelector} from "react-redux";
+import {DialogsType, MessagesType} from "../../redux/dialogsReducer";
 
 
 const Dialogs = () => {
 
-    let dialogsData = [
-        {id: 1, name: 'Dima'},
-        {id: 2, name: 'Valera'},
-        {id: 3, name: 'Sveta'},
-        {id: 4, name: 'Victor'},
-    ]
+    const dialogsData = useSelector<AppRootStateType, Array<DialogsType>>(state => state.dialogsPage.dialogsData)
+    const messagesData = useSelector<AppRootStateType, Array<MessagesType>>(state => state.dialogsPage.messagesData)
 
-    let messagesData = [
-        {id: 1, message: 'Hi!'},
-        {id: 2, message: 'Im awesome!'},
-        {id: 3, message: 'How are you?'},
-    ]
 
     return (
         <div className={s.dialogs}>
