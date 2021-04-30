@@ -13,6 +13,8 @@ type InitialStateType = {
     messagesData: Array<MessagesType>
 }
 
+type ActionType = AddMessageActionType
+
 const InitialState: InitialStateType = {
     dialogsData: [
         { id: 1, name: 'Dima' },
@@ -26,7 +28,32 @@ const InitialState: InitialStateType = {
         {id: 3, message: 'How are you?'},
     ]
 }
+const ADD_MESSAGE = 'ADD_MESSAGE'
 
-export const dialogsReducer = (state: InitialStateType = InitialState) => {
-    return state;
+export const dialogsReducer = (state: InitialStateType = InitialState, action: ActionType): InitialStateType => {
+    switch(action.type) {
+        case ADD_MESSAGE: {
+            let message = {
+                id: 4,
+                message: action.newMessage
+            }
+            return {
+                ...state,
+                messagesData: [...state.messagesData, message]
+            }
+        }
+        default:
+            return state
+    }
+}
+export const addMessageAC = (newMessage: string) => {
+    return {
+        type: ADD_MESSAGE,
+        newMessage
+    }
+}
+
+type AddMessageActionType = {
+    type: 'ADD_MESSAGE'
+    newMessage: string
 }

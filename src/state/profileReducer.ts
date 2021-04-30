@@ -34,7 +34,6 @@ export const profileReducer = (state: InitialStateType =InitialState, action: Ac
         default:
             return state;
     }
-
 }
 
 export const addPostAC = (newPostText: string) => {
