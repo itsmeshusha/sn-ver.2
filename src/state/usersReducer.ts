@@ -1,8 +1,9 @@
-type UserType = {
+export type UserType = {
     id: number
     followed: boolean
     name: string
     city: string
+    photo: string
 }
 
 type InitialStateType = {
@@ -13,9 +14,9 @@ type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUse
 
 const InitialState: InitialStateType = {
     users: [
-        {id: 1, followed: false, name: 'Sasha', city: 'Moscow'},
-        {id: 1, followed: false, name: 'Alesya', city: 'St.Petersburg'},
-        {id: 1, followed: false, name: 'Max', city: 'Novosibirsk'},
+        {id: 1, followed: false, name: 'Sasha', city: 'Moscow', photo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png'},
+        {id: 1, followed: false, name: 'Alesya', city: 'St.Petersburg', photo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png'},
+        {id: 1, followed: false, name: 'Max', city: 'Novosibirsk', photo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/72/Avatar_icon_green.svg/1024px-Avatar_icon_green.svg.png'},
     ]
 }
 
