@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../state/store";
 import {followAC, getUsersTC, unfollowAC, UserType} from "../../state/usersReducer";
 import s from './Users.module.css'
+import userPhoto from '../../assets/user.png'
 
 export const Users = () => {
     const [followValue, setFollowValue] = useState(false)
@@ -18,21 +19,25 @@ export const Users = () => {
         setFollowValue(true)
     }
 
+    const unfollow = (userId: number) => {
+        dispatch(unfollowAC(userId))
+        setFollowValue(false)
+    }
+
     return <div>
-        {users.map(u =>  <div key={u.id}>
+        {users.map(u =>  <div>
                 <span>
                     <div className={s.photo}>
-                        <img src={u.photo} />
+                        <img src={userPhoto} />
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => dispatch(unfollowAC(u.id))}>Unfollow</button>
+                            ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
                             : <button onClick={() => follow(u.id)}>Follow</button>}
                     </div>
                 </span>
             <span>
                 <div>{u.name}</div>
-                <div>{u.city}</div>
             </span>
             </div>
         )}
