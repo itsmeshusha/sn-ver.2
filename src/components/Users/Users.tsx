@@ -31,7 +31,7 @@ export const Users = () => {
                         <img src={userPhoto} />
                     </div>
                     <div>
-                        {u.followed
+                        {u.isFollow
                             ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
                             : <button onClick={() => follow(u.id)}>Follow</button>}
                     </div>
