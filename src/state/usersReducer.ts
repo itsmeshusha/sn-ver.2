@@ -23,12 +23,13 @@ type InitialStateType = {
     currentPage: number
 }
 
-type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setCurrentPageAC>
+type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setCurrentPageAC
+    | typeof setTotalUserCountAC>
 
 const InitialState: InitialStateType = {
     users: [],
-    pageSize: 10,
-    totalUsersCount: 100,
+    pageSize: 100,
+    totalUsersCount: 0,
     currentPage: 1
 }
 
@@ -36,6 +37,7 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT'
 
 export const usersReducer = (state: InitialStateType = InitialState, action: ActionType): InitialStateType => {
     switch(action.type) {
@@ -73,6 +75,13 @@ export const usersReducer = (state: InitialStateType = InitialState, action: Act
                 currentPage: action.currentPage
             }
         }
+        case SET_TOTAL_USER_COUNT: {
+            return {
+                ...state,
+                totalUsersCount: action.totalCount
+            }
+        }
+
 
         default:
             return state
@@ -84,11 +93,13 @@ export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setTotalUserCountAC = (totalCount: number) => ({type: SET_TOTAL_USER_COUNT, totalCount} as const)
 
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     usersAPI.getUsers(currentPage, pageSize).then(res => {
         dispatch(setUsersAC(res.items))
         dispatch(setCurrentPageAC(currentPage))
+        dispatch(setTotalUserCountAC(res.totalCount))
     })
 }
 
