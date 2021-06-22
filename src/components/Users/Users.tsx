@@ -16,7 +16,7 @@ export const Users = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getUsersTC())
+        dispatch(getUsersTC(currentPage, pageSize))
     }, [])
 
     const follow = (userId: number) => {

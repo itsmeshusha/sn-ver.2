@@ -77,8 +77,8 @@ export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
 
-export const getUsersTC = () => (dispatch: Dispatch) => {
-    usersAPI.getUsers().then(res => {
+export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    usersAPI.getUsers(currentPage, pageSize).then(res => {
         dispatch(setUsersAC(res.items))
     })
 }
