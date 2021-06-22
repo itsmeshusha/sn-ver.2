@@ -18,13 +18,18 @@ export type UserType = {
 
 type InitialStateType = {
     users: Array<UserType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC>
 
 const InitialState: InitialStateType = {
-    users: []
-
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 100,
+    currentPage: 1
 }
 
 const FOLLOW = 'FOLLOW'
