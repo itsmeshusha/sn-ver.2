@@ -17,7 +17,7 @@ export const Users = () => {
 
     useEffect(() => {
         dispatch(getUsersTC(currentPage, pageSize))
-    }, [])
+    }, [currentPage])
 
     const follow = (userId: number) => {
         dispatch(followAC(userId))
@@ -29,6 +29,10 @@ export const Users = () => {
         setFollowValue(false)
     }
 
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(getUsersTC(pageNumber, pageSize))
+    }
+
     let pagesCount = Math.ceil(totalUsersCount / pageSize)
     let pages = []
     for (let i = 1; i<=pagesCount; i++) {
@@ -37,7 +41,10 @@ export const Users = () => {
 
 
     return <div>
-        <div>{pages.map(el => <span className={currentPage === el ? s.selectedPage : ""}>{el}</span>)}</div>
+        <div>{pages.map(el => <span className={currentPage === el ? s.selectedPage : ""}
+                                    onClick={() => onPageChanged(el)}>
+            {el}
+        </span>)}</div>
         {users.map(u =>  <div>
                 <span>
                     <div className={s.photo}>

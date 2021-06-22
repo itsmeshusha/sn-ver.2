@@ -23,7 +23,7 @@ type InitialStateType = {
     currentPage: number
 }
 
-type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC>
+type ActionType = ReturnType<typeof followAC | typeof unfollowAC | typeof setUsersAC | typeof setCurrentPageAC>
 
 const InitialState: InitialStateType = {
     users: [],
@@ -35,6 +35,7 @@ const InitialState: InitialStateType = {
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 export const usersReducer = (state: InitialStateType = InitialState, action: ActionType): InitialStateType => {
     switch(action.type) {
@@ -63,7 +64,13 @@ export const usersReducer = (state: InitialStateType = InitialState, action: Act
         case SET_USERS: {
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: action.users
+            }
+        }
+        case SET_CURRENT_PAGE: {
+            return {
+                ...state,
+                currentPage: action.currentPage
             }
         }
 
@@ -76,9 +83,13 @@ export const usersReducer = (state: InitialStateType = InitialState, action: Act
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
 
 export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
     usersAPI.getUsers(currentPage, pageSize).then(res => {
         dispatch(setUsersAC(res.items))
+        dispatch(setCurrentPageAC(currentPage))
     })
 }
+
+
