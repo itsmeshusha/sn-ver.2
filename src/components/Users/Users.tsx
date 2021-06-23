@@ -4,6 +4,7 @@ import {AppRootStateType} from "../../state/store";
 import {followAC, getUsersTC, unfollowAC, UserType} from "../../state/usersReducer";
 import s from './Users.module.css'
 import userPhoto from '../../assets/user.png'
+import {Loader} from "../../assets/Loader/Loader";
 
 export const Users = () => {
     const [followValue, setFollowValue] = useState(false)
@@ -11,6 +12,7 @@ export const Users = () => {
     const pageSize = useSelector<AppRootStateType, number>(state => state.users.pageSize)
     const totalUsersCount = useSelector<AppRootStateType, number>(state => state.users.totalUsersCount)
     const currentPage = useSelector<AppRootStateType, number>(state => state.users.currentPage)
+    const isLoading = useSelector<AppRootStateType, boolean>(state => state.users.isLoading)
 
 
     const dispatch = useDispatch()
@@ -41,6 +43,7 @@ export const Users = () => {
 
 
     return <div>
+        {isLoading ? <Loader /> : null}
         <div>{pages.map(el => <span className={currentPage === el ? s.selectedPage : ""}
                                     onClick={() => onPageChanged(el)}>
             {el}
