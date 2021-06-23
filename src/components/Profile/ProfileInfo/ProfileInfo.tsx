@@ -1,6 +1,12 @@
 import React from 'react';
+import s from './ProfileInfo.module.css'
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../../state/store";
+import {ProfileType} from "../../../state/profileReducer";
 
 const ProfileInfo = () => {
+    const profile = useSelector<AppRootStateType, ProfileType>(state => state.profilePage.profile)
+
     return (
         <div>
             <img
@@ -8,8 +14,8 @@ const ProfileInfo = () => {
             <div>
                 Main content
             </div>
-            <div>
-                ava+description
+            <div className={s.ava}>
+                <img src={profile.photos.small} />
             </div>
         </div>
     )

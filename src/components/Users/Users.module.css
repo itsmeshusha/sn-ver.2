@@ -1,8 +1,7 @@
-.photo img {
+.photo img{
     width: 10%;
     height: 10%;
 }
-
 .selectedPage {
     font-weight: bold;
     padding: 5px;

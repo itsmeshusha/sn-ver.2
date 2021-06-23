@@ -5,6 +5,7 @@ import {followAC, getUsersTC, unfollowAC, UserType} from "../../state/usersReduc
 import s from './Users.module.css'
 import userPhoto from '../../assets/user.png'
 import {Loader} from "../../assets/Loader/Loader";
+import {NavLink} from "react-router-dom";
 
 export const Users = () => {
     const [followValue, setFollowValue] = useState(false)
@@ -50,9 +51,9 @@ export const Users = () => {
         </span>)}</div>
         {users.map(u =>  <div>
                 <span>
-                    <div className={s.photo}>
+                    <NavLink className={s.photo} to={`/profile/${u.id}`}>
                         <img src={u.photos.small ? u.photos.small : userPhoto} />
-                    </div>
+                    </NavLink>
                     <div>
                         {u.isFollow
                             ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
