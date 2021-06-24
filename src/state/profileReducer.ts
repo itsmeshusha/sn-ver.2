@@ -10,6 +10,15 @@ type InitialStateType = {
     newPostText: string
     profile: ProfileType
 }
+
+type PhotosType = {
+    small: string
+    large: string
+}
+export type ProfileType = {
+    userId: string
+    photos: PhotosType
+}
 export type ActionsType = ReturnType<typeof addPostAC | typeof setUserProfileAC>
 
 const InitialState: InitialStateType = {
@@ -20,10 +29,11 @@ const InitialState: InitialStateType = {
     ],
     newPostText: 'Hey hey!',
     profile: {
-        userId: 2,
+        userId: '2',
         photos: {
+            // small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
             small: "https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0",
-            large: "https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0"
+            large: ""
         }
     },
 }
@@ -59,18 +69,8 @@ export const addPostAC = (newPostText: string) => {
 }
 export const setUserProfileAC = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const)
 
-export const getUserProfileTC = (userId: number) => (dispatch: Dispatch) => {
+export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
     return profileAPI.getProfile(userId).then(res => {
         dispatch(setUserProfileAC(res.data))
     })
-}
-
-
-type PhotosType = {
-    small: string
-    large: string
-}
-export type ProfileType = {
-    userId: number
-    photos: PhotosType
 }

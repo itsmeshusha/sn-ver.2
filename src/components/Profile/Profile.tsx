@@ -5,14 +5,20 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserProfileTC, ProfileType} from "../../state/profileReducer";
 import {AppRootStateType} from "../../state/store";
+import {useParams} from "react-router-dom";
+
+type ParamType = {
+    userId: string
+}
 
 const Profile = () => {
     const dispatch = useDispatch()
-    const profile = useSelector<AppRootStateType, ProfileType>(state => state.profilePage.profile)
+    const {userId} = useParams<ParamType>()
+
 
     useEffect(() => {
-        dispatch(getUserProfileTC(profile.userId))
-    }, [])
+        dispatch(getUserProfileTC(userId))
+    }, [userId])
 
     return <div className={s.content}>
         <ProfileInfo />
