@@ -5,3 +5,10 @@
 .header img {
     width: 20px;
 }
+.loginBlock {
+    display: flex;
+}
+.loginBlock a{
+    text-decoration: none;
+    color: white
+}
