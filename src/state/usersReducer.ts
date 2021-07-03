@@ -13,7 +13,7 @@ export type UserType = {
         city: string;
         country: string;
     };
-    isFollow: boolean;
+    followed: boolean;
 }
 
 type InitialStateType = {
@@ -90,8 +90,6 @@ export const usersReducer = (state: InitialStateType = InitialState, action: Act
                 isLoading: action.isLoading
             }
         }
-
-
         default:
             return state
     }
@@ -114,5 +112,22 @@ export const getUsersTC = (currentPage: number, pageSize: number) => (dispatch: 
         dispatch(setTotalUserCountAC(res.totalCount))
     })
 }
-
+export const followTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true))
+    usersAPI.follow(userId).then(res => {
+        if(res.data.resultCode === 0) {
+            dispatch(followAC(userId))
+        }
+        dispatch(setIsLoadingAC(false))
+    })
+}
+export const unfollowTC = (userId: number) => (dispatch: Dispatch) => {
+    dispatch(setIsLoadingAC(true))
+    usersAPI.unfollow(userId).then(res => {
+        if(res.data.resultCode === 0) {
+            dispatch(unfollowAC(userId))
+        }
+        dispatch(setIsLoadingAC(false))
+    })
+}
 
