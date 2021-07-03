@@ -41,11 +41,11 @@ export const Users = () => {
 
     return <div>
         {isLoading ? <Loader /> : null}
-        <div>{pages.map(el => <span className={currentPage === el ? s.selectedPage : ""}
+        <div>{pages.map(el => <span key={el} className={currentPage === el ? s.selectedPage : ""}
                                     onClick={() => onPageChanged(el)}>
             {el}
         </span>)}</div>
-        {users.map(u =>  <div>
+        {users.map(u =>  <div key={u.id}>
                 <span>
                     <NavLink className={s.photo} to={`/profile/${u.id}`}>
                         <img src={u.photos.small ? u.photos.small : userPhoto} />
