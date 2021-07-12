@@ -52,8 +52,8 @@ export const Users = () => {
                     </NavLink>
                     <div>
                         {u.followed
-                            ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
-                            : <button onClick={() => follow(u.id)}>Follow</button>}
+                            ? <button disabled={isLoading} onClick={() => unfollow(u.id)}>Unfollow</button>
+                            : <button disabled={isLoading} onClick={() => follow(u.id)}>Follow</button>}
                     </div>
                 </span>
             <span>
