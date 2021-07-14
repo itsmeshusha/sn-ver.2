@@ -5,12 +5,14 @@ import Message from "./Message/Message";
 import {AppRootStateType} from "../../state/store";
 import {useDispatch, useSelector} from "react-redux";
 import {addMessageAC, DialogsType, MessagesType} from "../../state/dialogsReducer";
+import {Redirect} from "react-router-dom";
 
 
 const Dialogs = () => {
     const [value, setValue] = useState('')
     const dialogsData = useSelector<AppRootStateType, Array<DialogsType>>(state => state.dialogsPage.dialogsData)
     const messagesData = useSelector<AppRootStateType, Array<MessagesType>>(state => state.dialogsPage.messagesData)
+    const auth = useSelector<AppRootStateType, boolean>(state => state.auth.isAuth)
 
     const dispatch = useDispatch()
 
@@ -20,6 +22,10 @@ const Dialogs = () => {
     }
     const onSendMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setValue(e.target.value)
+    }
+
+    if(!auth) {
+        return <Redirect to={'/login'} />
     }
 
     return (
