@@ -9,6 +9,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
+import { Login } from './components/Login/Login';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     <Route path={'/music'} render={() => <Music />}/>
                     <Route path={'/settings'} render={() => <Settings />}/>
                     <Route path={'/users'} render={() => <Users />}/>
+                    <Route path={'/login'} render={() => <Login />}/>
 
                 </div>
             </div>
