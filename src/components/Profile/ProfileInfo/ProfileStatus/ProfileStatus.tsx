@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getStatusTC} from "../../../../state/profileReducer";
+import {getStatusTC, updateStatusTC} from "../../../../state/profileReducer";
 import {useParams} from "react-router-dom";
 import {ParamType} from "../../Profile";
 import {AppRootStateType} from "../../../../state/store";
 
 export const ProfileStatus = () => {
-    const [, setStatus] = useState('fdfdfd')
-    const [editMode, setEditMode] = useState(false)
     const status = useSelector<AppRootStateType, string>(state => state.profilePage.status)
+    const [localStatus, setStatus] = useState(status)
+    const [editMode, setEditMode] = useState(false)
     const {userId} = useParams<ParamType>()
     const dispatch = useDispatch()
 
@@ -21,15 +21,19 @@ export const ProfileStatus = () => {
     }
     const deactivateEditMode = () => {
         setEditMode(false)
+        dispatch(updateStatusTC(localStatus))
+    }
+    const updateStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.currentTarget.value)
     }
 
     return (
         <div>
             {editMode
                 ? <div>
-                    <input autoFocus={true} value={status} onBlur={deactivateEditMode}/>
+                    <input autoFocus={true} value={localStatus} onBlur={deactivateEditMode} onChange={updateStatus}/>
                 </div>
-                : <span onDoubleClick={activateEditMode}>{status}</span>}
+                : <span onDoubleClick={activateEditMode}>{status || "No  status"}</span>}
         </div>
     )
 }

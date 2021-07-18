@@ -20,9 +20,9 @@ const Profile = () => {
         dispatch(getUserProfileTC(userId))
     }, [userId])
 
-    if(!auth) {
-       return <Redirect to={'/login'} />
-    }
+    // if(!auth) {
+    //    return <Redirect to={'/login'} />
+    // }
 
     return <div className={s.content}>
         <ProfileInfo />
