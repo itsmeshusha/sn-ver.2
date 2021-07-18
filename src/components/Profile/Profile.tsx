@@ -3,11 +3,11 @@ import s from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {useDispatch, useSelector} from "react-redux";
-import {getUserProfileTC, ProfileType} from "../../state/profileReducer";
+import {getStatusTC, getUserProfileTC, ProfileType} from "../../state/profileReducer";
 import {AppRootStateType} from "../../state/store";
 import {Redirect, useParams} from "react-router-dom";
 
-type ParamType = {
+export type ParamType = {
     userId: string
 }
 
