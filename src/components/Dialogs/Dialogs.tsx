@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React from 'react'
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -15,7 +15,7 @@ type FormDataType = {
 const SendMessageForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'newMessageBody'} plsceholder={'Enter your text'} />
+            <Field component={'textarea'} name={'newMessageBody'} placeholder={'Enter your text'} />
             <div>
                 <button>Send</button>
             </div>
