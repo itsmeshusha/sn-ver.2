@@ -5,15 +5,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../state/store";
 import {addPostAC, PostType} from "../../../state/profileReducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
 
 type FormDataType = {
     newPost: string
 }
 
+const maxLength10 = maxLengthCreator(10)
+
 const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component={'textarea'} name={'newPost'} placeholder={'Enter your text'} />
+            <Field component={'textarea'} name={'newPost'} placeholder={'Enter your text'} validate={[required, maxLength10]} />
             <div>
                 <button>Add Post</button>
             </div>
